@@ -1,25 +1,13 @@
-import {
-  IsBoolean,
-  IsDateString,
-  IsIn,
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsDateString, IsIn, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateExperienceDto {
-  @IsString()
-  @IsNotEmpty()
-  title: string;
-
   @IsString()
   @IsNotEmpty()
   company: string;
 
   @IsString()
-  @IsOptional()
-  description?: string;
+  @IsNotEmpty()
+  role: string;
 
   @IsString()
   @IsNotEmpty()
@@ -27,12 +15,12 @@ export class CreateExperienceDto {
   type: string;
 
   @IsString()
-  @IsOptional()
-  url?: string;
+  @IsNotEmpty()
+  url: string;
 
   @IsString()
-  @IsOptional()
-  color?: string;
+  @IsNotEmpty()
+  color: string;
 
   @IsDateString()
   @IsNotEmpty()
@@ -41,10 +29,6 @@ export class CreateExperienceDto {
   @IsDateString()
   @IsOptional()
   endDate?: string;
-
-  @IsBoolean()
-  @IsOptional()
-  current?: boolean;
 
   @IsInt()
   @IsOptional()

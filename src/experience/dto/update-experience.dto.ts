@@ -1,17 +1,13 @@
-import { IsBoolean, IsDateString, IsIn, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsIn, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class UpdateExperienceDto {
-  @IsString()
-  @IsOptional()
-  title?: string;
-
   @IsString()
   @IsOptional()
   company?: string;
 
   @IsString()
   @IsOptional()
-  description?: string;
+  role?: string;
 
   @IsString()
   @IsOptional()
@@ -33,10 +29,6 @@ export class UpdateExperienceDto {
   @IsDateString()
   @IsOptional()
   endDate?: string;
-
-  @IsBoolean()
-  @IsOptional()
-  current?: boolean;
 
   @IsInt()
   @IsOptional()

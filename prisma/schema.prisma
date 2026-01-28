@@ -19,9 +19,6 @@ model User {
 
   loginCodes    LoginCode[]
   oauthAccounts OAuthAccount[]
-  posts         Post[]
-  comments      Comment[]
-  likes         Like[]
 
   @@index([email])
   @@index([username])
@@ -75,70 +72,16 @@ model Link {
 
 model Experience {
   id          String    @id @default(uuid())
-  title       String
   company     String
-  description String?
+  role        String
   type        String // 'full-time' | 'part-time' | 'contract'
-  url         String?
-  color       String?
+  url         String
+  color       String
   startDate   DateTime  @map("start_date")
   endDate     DateTime? @map("end_date")
-  current     Boolean   @default(false)
   order       Int       @default(0)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   @@map("experiences")
-}
-
-model Post {
-  id        String   @id @default(uuid())
-  title     String
-  content   String   @db.Text
-  excerpt   String?  @db.Text
-  published Boolean  @default(false)
-  authorId  String   @map("author_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  comments Comment[]
-  likes    Like[]
-
-  @@index([authorId])
-  @@index([published])
-  @@index([createdAt])
-  @@map("posts")
-}
-
-model Comment {
-  id        String   @id @default(uuid())
-  content   String   @db.Text
-  postId    String   @map("post_id")
-  userId    String   @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([postId])
-  @@index([userId])
-  @@index([createdAt])
-  @@map("comments")
-}
-
-model Like {
-  id        String   @id @default(uuid())
-  postId    String   @map("post_id")
-  userId    String   @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at")
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([postId, userId])
-  @@index([postId])
-  @@index([userId])
-  @@map("likes")
 }
