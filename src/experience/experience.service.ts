@@ -5,7 +5,7 @@ import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
 
 @Injectable()
-export class ExperiencesService {
+export class ExperienceService {
   constructor(private prisma: PrismaService) {}
 
   async create(createExperienceDto: CreateExperienceDto) {

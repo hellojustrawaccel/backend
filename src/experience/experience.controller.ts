@@ -5,11 +5,11 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
-import { ExperiencesService } from './experiences.service';
+import { ExperienceService } from './experience.service';
 
-@Controller('experiences')
-export class ExperiencesController {
-  constructor(private readonly experiencesService: ExperiencesService) {}
+@Controller('experience')
+export class ExperienceController {
+  constructor(private readonly experiencesService: ExperienceService) {}
 
   @Get()
   findAll() {
