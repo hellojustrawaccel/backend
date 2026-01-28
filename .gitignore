@@ -1,5 +1,21 @@
 dist
 node_modules
+
 .env
 
-/generated/prisma
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+coverage
+*.lcov
+.nyc_output
+
+.DS_Store
+Thumbs.db
+
+*.tsbuildinfo
+tmp
+temp
+.cache
