@@ -71,17 +71,54 @@ model Link {
 }
 
 model Experience {
-  id          String    @id @default(uuid())
-  company     String
-  role        String
-  type        String // 'full-time' | 'part-time' | 'contract'
-  url         String
-  color       String
-  startDate   DateTime  @map("start_date")
-  endDate     DateTime? @map("end_date")
-  order       Int       @default(0)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+  id        String    @id @default(uuid())
+  company   String
+  role      String
+  type      String // 'full-time' | 'part-time' | 'contract'
+  url       String
+  color     String
+  startDate DateTime  @map("start_date")
+  endDate   DateTime? @map("end_date")
+  order     Int       @default(0)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
   @@map("experiences")
+}
+
+model Project {
+  id            String   @id @default(uuid())
+  name          String
+  description   String?
+  avatar        String
+  provider      String // 'github' | 'gitlab' | 'sourcehut'
+  repositoryUrl String   @map("repository_url")
+  color         String?
+  order         Int      @default(0)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  stats ProjectStats?
+
+  @@map("projects")
+}
+
+model ProjectStats {
+  id               String    @id @default(uuid())
+  projectId        String    @unique @map("project_id")
+  commitActivity   Json      @map("commit_activity")
+  languages        Json
+  wakatime         Json?
+  stars            Int       @default(0)
+  forks            Int       @default(0)
+  openIssues       Int       @default(0) @map("open_issues")
+  openPullRequests Int       @default(0) @map("open_pull_requests")
+  contributors     Json?
+  lastCommitDate   DateTime? @map("last_commit_date")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@map("project_stats")
 }
